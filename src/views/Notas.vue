@@ -119,7 +119,11 @@ export default {
 					console.log("Esta es la respuesta", response.data);
 				})
 				.catch((error) => {
-					console.log("Este es el error:" + error.response);
+					console.log("Este es el error:", error.response);
+                    if(error.response.status == 403){
+                        console.log("Error de credenciales");
+                        this.$router.push({ name: 'Login'})
+                    }
 				});
 		},
 		mostrarNota(id) {
@@ -131,7 +135,7 @@ export default {
 					this.mostrarModal();
 				})
 				.catch((error) => {
-					console.log("Este es el error:" + error.response);
+					console.log("Este es el error:", error.response);
 				});
 		},
 		crearNota() {
@@ -143,7 +147,7 @@ export default {
 					this.cerrarModal();
 				})
 				.catch((error) => {
-					console.log("Este es el error:" + error.response);
+					console.log("Este es el error:", error.response);
 				});
 		},
 		actualizarNota() {
@@ -154,7 +158,7 @@ export default {
 					this.cerrarModal();
 				})
 				.catch((error) => {
-					console.log("Este es el error:" + error.response);
+					console.log("Este es el error:", error.response);
 				});
 		},
 		borrarNota() {
@@ -165,7 +169,7 @@ export default {
 					this.cerrarModal();
 				})
 				.catch((error) => {
-					console.log("Este es el error:" + error.response);
+					console.log("Este es el error:", error.response);
 				});
 		},
 	},

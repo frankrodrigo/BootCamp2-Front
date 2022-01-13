@@ -1,5 +1,5 @@
 <template>
-	<nav class="navbar navbar-light verde">
+	<nav class="navbar navbar-light verde" v-if="!['Login'].includes($route.name)">
 		<h3 class="mx-4">Notas!</h3>
 		<ul class="nav justify-content-end">
 			<li class="nav-item">
@@ -10,6 +10,9 @@
 			</li>
 			<li class="nav-item">
 				<router-link class="nav-link" to="/perfil">Mi Perfil</router-link>
+			</li>
+            <li class="nav-item">
+				<router-link class="nav-link" to="/login">Login</router-link>
 			</li>
 		</ul>
 	</nav>
