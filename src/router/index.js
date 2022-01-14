@@ -30,7 +30,7 @@ const routes = [
     path: '/registrarse',
     name: 'Registrarse',
     component: Registrarse
-  }
+  },
 ]
 
 const router = createRouter({

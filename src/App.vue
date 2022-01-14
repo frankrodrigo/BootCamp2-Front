@@ -8,16 +8,53 @@
 			<li class="nav-item">
 				<router-link class="nav-link" to="/notas">Notas</router-link>
 			</li>
-			<li class="nav-item">
+			<!-- <li class="nav-item">
 				<router-link class="nav-link" to="/perfil">Mi Perfil</router-link>
-			</li>
-            <li class="nav-item">
+			</li> -->
+            <li class="nav-item" v-if="!logueado">
 				<router-link class="nav-link" to="/login">Login</router-link>
+			</li>
+            <li class="nav-item" v-if="logueado">
+				<a class="nav-link">{{usuario}}</a>
+			</li>
+            <li class="nav-item" v-if="logueado">
+				<a class="nav-link" style="cursor:pointer;" @click="cerrarSesion">Cerrar Sesion</a>
+
 			</li>
 		</ul>
 	</nav>
 	<router-view/>
 </template>
+
+<script>
+export default {
+    name: "App",
+	data() {
+		return {
+			usuario: null,
+            logueado: null,
+		};
+	},
+    methods:{
+        cerrarSesion(){
+            console.log("this.cerrarSesion");
+            localStorage.removeItem('token');
+            localStorage.removeItem('refresh');
+            localStorage.removeItem('usuario');
+            this.$router.push({ name: 'Login'})
+        }
+    },
+    created() {
+		const usuario = JSON.parse(localStorage.getItem('usuario'));
+        console.log(usuario, "Este es el usuario")
+        if(usuario){
+            this.logueado = true;
+            this.usuario = usuario;
+        }
+	},
+
+}
+</script>
 
 <style>
 .verde{

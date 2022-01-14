@@ -98,7 +98,9 @@ import EventService from "@/services/EventService.js";
 export default {
 	name: "Notas",
 	data() {
+        let ss = new EventService();
 		return {
+            ss: ss,
 			modalNotaVisible: false,
 			editar: false,
 			notas: [],
@@ -113,7 +115,7 @@ export default {
 			this.modalNotaVisible = false;
 		},
 		listarNotas() {
-			EventService.listNotas()
+			this.ss.listNotas()
 				.then((response) => {
 					this.notas = response.data;
 					console.log("Esta es la respuesta", response.data);
@@ -122,13 +124,18 @@ export default {
 					console.log("Este es el error:", error.response);
                     if(error.response.status == 403){
                         console.log("Error de credenciales");
-                        this.$router.push({ name: 'Login'})
+                        const refresh = JSON.parse(localStorage.getItem('refresh'));
+                        if(refresh){
+                            // this.refreshToken();
+                        }else{
+                            this.$router.push({ name: 'Login'})
+                        }
                     }
 				});
 		},
 		mostrarNota(id) {
 			this.editar = true;
-			EventService.showNota(id)
+			this.ss.showNota(id)
 				.then((response) => {
 					console.log("Se muestra la nota", response.data);
 					this.nota = response.data;
@@ -140,7 +147,7 @@ export default {
 		},
 		crearNota() {
 			this.editar = false;
-			EventService.crearNota(this.nota)
+			this.ss.crearNota(this.nota)
 				.then((response) => {
 					console.log("Se creo la nota", response.data);
 					this.listarNotas();
@@ -151,7 +158,7 @@ export default {
 				});
 		},
 		actualizarNota() {
-			EventService.actualizarNota(this.nota)
+			this.ss.actualizarNota(this.nota)
 				.then((response) => {
 					console.log("Se actualizo la nota", response.data);
 					this.listarNotas();
@@ -162,7 +169,7 @@ export default {
 				});
 		},
 		borrarNota() {
-			EventService.borrarNota(this.nota)
+			this.ss.borrarNota(this.nota)
 				.then((response) => {
 					console.log("Se borro la nota", response.data);
 					this.listarNotas();
@@ -172,8 +179,24 @@ export default {
 					console.log("Este es el error:", error.response);
 				});
 		},
+        // refreshToken() {
+        //     const refresh = JSON.parse(localStorage.getItem('refresh'));
+
+		// 	EventService.refreshToken({"refresh": refresh})
+		// 		.then((response) => {
+		// 			console.log("Se actualizo el token", response.data);
+        //             localStorage.setItem('token', JSON.stringify(response.data.access));
+        //             EventService = EventService.reloadApiClient();
+        //             this.listNotas();
+		// 		})
+		// 		.catch((error) => {
+		// 			console.log("Este es el error actualizar token:", error.response);
+		// 		});
+		// },
 	},
 	created() {
+        const access = JSON.parse(localStorage.getItem('token'));
+        console.log("Access notas", access)
 		this.listarNotas();
 	},
 	components: {

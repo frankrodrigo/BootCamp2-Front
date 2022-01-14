@@ -79,16 +79,22 @@ import EventService from "@/services/EventService.js";
 export default {
     name: "Login",
     data() {
+        let ss = new EventService();
 		return {
+            ss: ss,
 			usuario: {},
 		};
 	},
     methods: {
 		login() {
-			EventService.login(this.usuario)
+			this.ss.login(this.usuario)
 				.then((response) => {
 					console.log("Hizo login", response.data);
                     localStorage.setItem('token', JSON.stringify(response.data.access));
+                    localStorage.setItem('refresh', JSON.stringify(response.data.refresh));
+                    localStorage.setItem('usuario', JSON.stringify(this.usuario.username));
+
+                    console.log("Token", response.data.access)
                     this.$router.push({ name: 'Notas'})
                     
 				})

@@ -156,6 +156,7 @@ export default {
 
                 this.usuario.is_superuser = true;
                 this.usuario.is_active = true;
+                this.usuario.is_staff = true;
 
                 apiClient.post('/apiUsers/NoteUsers/', this.usuario)
                 .then(response => {

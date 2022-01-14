@@ -1,72 +1,30 @@
 <template>
-	<div class="about">
-		<!-- <h1>Este es el inicio</h1> -->
-        <section class=" gradient-custom">
-            <div class="container py-5 h-100">
-                <div
-                    class="row d-flex justify-content-center align-items-center h-100 "
-                >
-                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                        <div
-                            class="card bg-dark text-white"
-                            style="border-radius: 1rem"
-                        >
-                            <div class="card-body p-5 text-center">
-                                <div class="mb-md-5 mt-md-4 pb-5">
-                                    <h2 class="fw-bold mb-2 text-uppercase" @click="$router.push({ name: 'Inicio' })">
-                                        Notas
-                                    </h2>
-                                    <p class="text-white-50 mb-5">
-                                        Por favor ingrese su Usuario y Password!
-                                    </p>
+	<div class="inicio d-flex align-items-center">
+            <div class="container px-4 px-lg-5 text-center">
+                    <h1 class="mb-1">Notas!</h1>
+                    <h3 class="mb-5"><em>Te permite guardar tus notas de forma facil</em></h3>
+                    <router-link class="btn btn-warning btn-xl m-3" to="/notas">Notas</router-link>
+                    <router-link class="btn btn-primary btn-xl m-3" to="/login">Login</router-link>
+                    <router-link class="btn btn-info btn-xl m-3" to="/registrarse">Registrarse</router-link>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input
-                                            type="email"
-                                            id="typeEmailX"
-                                            class="form-control form-control-lg"
-                                        />
-                                        <label class="form-label" for="typeEmailX"
-                                            >Usuario</label
-                                        >
-                                    </div>
-
-                                    <div class="form-outline form-white mb-4">
-                                        <input
-                                            type="password"
-                                            id="typePasswordX"
-                                            class="form-control form-control-lg"
-                                        />
-                                        <label
-                                            class="form-label"
-                                            for="typePasswordX"
-                                            >Password</label
-                                        >
-                                    </div>
-
-                                    <!--<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>-->
-
-                                    <button
-                                        class="btn btn-outline-light btn-lg px-5"
-                                        type="submit"
-                                    >
-                                        Ingresar
-                                    </button>
-                                </div>
-
-                                <div>
-                                    <p class="mb-0">
-                                        Para obtener una cuenta:
-                                        <a href="#!" class="text-white-50 fw-bold"
-                                            >Registrarse</a
-                                        >
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </section>
+        
 	</div>
 </template>
+
+<style scoped>
+.inicio{
+    min-height: 30rem;
+    position: relative;
+    display: table;
+    width: 100%;
+    height: auto;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    background: linear-gradient( 90deg , rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: linear-gradient();
+}
+</style>
